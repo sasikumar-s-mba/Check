@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vimala &amp; Manibharathi Wedding</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Cardo:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+        :root {
+            --maroon: #7A1B2E;
+            --maroon-dark: #4A0F1C;
+            --gold: #C9A227;
+            --gold-light: #E8C766;
+            --ivory: #FFF8EC;
+            --cream: #FFFDF7;
+            --ink: #3D2B1F;
+        }
+
+        body {
+            font-family: 'Cardo', serif;
+            color: var(--ink);
+            background-color: var(--ivory);
+            background-image: radial-gradient(circle, rgba(122,27,46,0.10) 1px, transparent 1.6px);
+            background-size: 22px 22px;
+        }
+
+        h1, h2, .display-font { font-family: 'Cormorant Garamond', serif; }
+
+        .invite-card {
+            position: relative;
+            background: var(--cream);
+            border: 1px solid rgba(201,162,39,0.45);
+            box-shadow: 0 10px 30px -10px rgba(74,15,28,0.25);
+        }
+        .kolam-corner {
+            position: absolute;
+            width: 38px;
+            height: 38px;
+            opacity: 0.9;
+            animation: kolamReveal 0.7s ease-out both;
+        }
+        .kolam-corner.tl { top: 8px; left: 8px; }
+        .kolam-corner.tr { top: 8px; right: 8px; }
+        .kolam-corner.br { bottom: 8px; right: 8px; }
+        .kolam-corner.bl { bottom: 8px; left: 8px; }
+        .kolam-corner.tr { animation-delay: 0.12s; }
+        .kolam-corner.br { animation-delay: 0.24s; }
+        .kolam-corner.bl { animation-delay: 0.36s; }
+
+        @keyframes kolamReveal {
+            from { opacity: 0; transform: scale(0.4) rotate(var(--rot, 0deg)); }
+            to   { opacity: 0.9; transform: scale(1) rotate(var(--rot, 0deg)); }
+        }
+        .kolam-corner.tr { --rot: 90deg; transform: rotate(90deg); }
+        .kolam-corner.br { --rot: 180deg; transform: rotate(180deg); }
+        .kolam-corner.bl { --rot: 270deg; transform: rotate(270deg); }
+
+        .sri-mark { font-family: 'Cormorant Garamond', serif; color: var(--gold); letter-spacing: 0.15em; }
+        .ampersand { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500; color: var(--gold); }
+        .divider-line { height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
+
+        .jasmine-petal {
+            position: absolute;
+            cursor: pointer;
+            animation: floatPetal linear infinite;
+            user-select: none;
+            transition: transform 0.2s;
+            filter: drop-shadow(0 1px 3px rgba(122,27,46,0.18));
+        }
+        .jasmine-petal:hover { transform: scale(1.35) rotate(8deg); }
+        @keyframes floatPetal {
+            0%   { transform: translateY(0) translateX(0) rotate(0deg); }
+            25%  { transform: translateY(-50px) translateX(22px) rotate(20deg); }
+            50%  { transform: translateY(-15px) translateX(-18px) rotate(-12deg); }
+            75%  { transform: translateY(-70px) translateX(12px) rotate(14deg); }
+            100% { transform: translateY(0) translateX(0) rotate(0deg); }
+        }
+
+        .page-transition { transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-out { opacity: 0; pointer-events: none; transform: translateY(20px); }
+
+        .deity-frame {
+            width: 110px; height: 130px; margin: 0 auto;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 0 4px rgba(201,162,39,0.18), 0 4px 18px rgba(74,15,28,0.18);
+            overflow: hidden;
+            background: linear-gradient(160deg, #fff8ec 60%, #f5e6c8 100%);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        #page2 { overflow-y: auto; padding-top: 2rem; padding-bottom: 5rem; }
+
+        /* ---- Wishes FAB ---- */
+        #wishes-fab {
+            position: fixed;
+            bottom: 24px; right: 20px;
+            z-index: 100;
+            display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+        }
+        #wishes-btn {
+            background: var(--maroon);
+            border: 1.5px solid var(--gold);
+            color: var(--cream);
+            border-radius: 50px;
+            padding: 10px 18px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 18px rgba(74,15,28,0.35);
+            display: flex; align-items: center; gap-6px;
+            transition: box-shadow 0.2s, transform 0.15s;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+        }
+        #wishes-btn:hover { box-shadow: 0 6px 24px rgba(74,15,28,0.45); transform: translateY(-1px); }
+        #view-wishes-link {
+            font-family: 'Cardo', serif;
+            font-size: 12px;
+            color: var(--maroon);
+            background: rgba(255,253,247,0.92);
+            border: 1px solid rgba(201,162,39,0.4);
+            border-radius: 20px;
+            padding: 4px 12px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(74,15,28,0.1);
+            transition: background 0.15s;
+            display: none;
+        }
+        #view-wishes-link:hover { background: var(--ivory); }
+        #wish-count-badge {
+            display: none;
+            background: var(--gold);
+            color: var(--maroon-dark);
+            border-radius: 50%;
+            width: 18px; height: 18px;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 18px;
+            text-align: center;
+            margin-left: 6px;
+        }
+
+        /* ---- Wish Panel (slide-up drawer) ---- */
+        #wish-panel {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            z-index: 200;
+            background: var(--cream);
+            border-top: 1.5px solid rgba(201,162,39,0.5);
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -8px 40px rgba(74,15,28,0.22);
+            padding: 24px 20px 32px;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.32,0.72,0,1);
+            max-height: 75vh;
+            overflow-y: auto;
+        }
+        #wish-panel.open { transform: translateY(0); }
+        #wish-panel-overlay {
+            position: fixed; inset: 0; z-index: 199;
+            background: rgba(74,15,28,0.25);
+            backdrop-filter: blur(2px);
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.4s;
+        }
+        #wish-panel-overlay.open { opacity: 1; pointer-events: auto; }
+
+        .panel-handle {
+            width: 36px; height: 4px;
+            background: rgba(201,162,39,0.4);
+            border-radius: 2px;
+            margin: 0 auto 16px;
+        }
+        #wish-textarea {
+            width: 100%;
+            min-height: 90px;
+            border: 1px solid rgba(201,162,39,0.5);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-family: 'Cardo', serif;
+            font-size: 15px;
+            color: var(--ink);
+            background: var(--ivory);
+            resize: none;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        #wish-textarea:focus { border-color: var(--gold); }
+        #wish-name-input {
+            width: 100%;
+            border: 1px solid rgba(201,162,39,0.5);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-family: 'Cardo', serif;
+            font-size: 15px;
+            color: var(--ink);
+            background: var(--ivory);
+            outline: none;
+            transition: border-color 0.2s;
+            margin-bottom: 10px;
+        }
+        #wish-name-input:focus { border-color: var(--gold); }
+        #send-wish-btn {
+            width: 100%;
+            background: var(--maroon);
+            color: var(--cream);
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            padding: 11px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: opacity 0.2s;
+            letter-spacing: 0.04em;
+        }
+        #send-wish-btn:hover { opacity: 0.88; }
+        #send-wish-btn:disabled { opacity: 0.5; cursor: default; }
+        .wish-success {
+            text-align: center;
+            padding: 16px 0 4px;
+            color: var(--maroon);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+        }
+
+        /* ---- Wishes List Panel ---- */
+        #wishes-list-panel {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            z-index: 200;
+            background: var(--cream);
+            border-top: 1.5px solid rgba(201,162,39,0.5);
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -8px 40px rgba(74,15,28,0.22);
+            padding: 24px 20px 40px;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.32,0.72,0,1);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        #wishes-list-panel.open { transform: translateY(0); }
+
+        .wish-card {
+            background: var(--ivory);
+            border: 1px solid rgba(201,162,39,0.3);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            text-align: left;
+            position: relative;
+        }
+        .wish-card .wish-from {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            color: var(--maroon);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .wish-card .wish-text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--ink);
+        }
+        .wish-card .wish-time {
+            font-size: 11px;
+            color: rgba(61,43,31,0.45);
+            margin-top: 6px;
+        }
+        .wish-jasmine {
+            position: absolute;
+            right: 10px; top: 10px;
+            font-size: 14px;
+            opacity: 0.5;
+        }
+        .empty-wishes {
+            text-align: center;
+            padding: 30px 0;
+            color: rgba(61,43,31,0.4);
+            font-style: italic;
+            font-size: 15px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .jasmine-petal, .kolam-corner { animation: none !important; }
+            #wish-panel, #wishes-list-panel { transition: none !important; }
+        }
+    </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+ </head>
+ <body class="min-h-screen overflow-hidden relative">
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+   <defs>
+    <symbol id="kolam-motif" viewBox="0 0 60 60">
+     <g fill="none" stroke="#C9A227" stroke-width="1.3" stroke-linecap="round">
+      <path d="M52,30 41,11 19,11 8,30 19,49 41,49 Z"/>
+      <line x1="30" y1="30" x2="52" y2="30"/><line x1="30" y1="30" x2="41" y2="11"/>
+      <line x1="30" y1="30" x2="19" y2="11"/><line x1="30" y1="30" x2="8" y2="30"/>
+      <line x1="30" y1="30" x2="19" y2="49"/><line x1="30" y1="30" x2="41" y2="49"/>
+     </g>
+     <g fill="#C9A227">
+      <circle cx="30" cy="30" r="2.6"/><circle cx="52" cy="30" r="2.1"/>
+      <circle cx="41" cy="11" r="2.1"/><circle cx="19" cy="11" r="2.1"/>
+      <circle cx="8" cy="30" r="2.1"/><circle cx="19" cy="49" r="2.1"/>
+      <circle cx="41" cy="49" r="2.1"/>
+     </g>
+    </symbol>
+    <symbol id="jasmine-flower" viewBox="0 0 40 40">
+     <g fill="#FFFDF7" stroke="#E8C766" stroke-width="0.8">
+      <ellipse cx="20" cy="11" rx="5" ry="8" transform="rotate(0 20 20)"/>
+      <ellipse cx="20" cy="11" rx="5" ry="8" transform="rotate(72 20 20)"/>
+      <ellipse cx="20" cy="11" rx="5" ry="8" transform="rotate(144 20 20)"/>
+      <ellipse cx="20" cy="11" rx="5" ry="8" transform="rotate(216 20 20)"/>
+      <ellipse cx="20" cy="11" rx="5" ry="8" transform="rotate(288 20 20)"/>
+     </g>
+     <circle cx="20" cy="20" r="3.4" fill="#C9A227"/>
+    </symbol>
+   </defs>
+  </svg>
+
+  <!-- Page 1 -->
+  <div id="page1" class="page-transition flex flex-col items-center justify-center min-h-screen relative">
+   <div class="text-center z-10 px-6">
+    <p class="sri-mark text-sm mb-3">ஸ்ரீ</p>
+    <p class="text-lg mb-4 italic" style="font-family:Cardo,serif;color:var(--maroon-dark);">With the blessings of our families</p>
+    <h1 class="display-font font-semibold text-4xl md:text-5xl mb-6 tracking-wide" style="color:var(--maroon);">Vimala <span class="ampersand">&amp;</span> Manibharathi</h1>
+    <p class="text-xs uppercase tracking-[0.2em] mt-8 animate-pulse" style="color:var(--gold);">✦ tap a jasmine to begin ✦</p>
+   </div>
+   <div id="hearts-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+  </div>
+
+  <!-- Page 2 -->
+  <div id="page2" class="page-transition fade-out absolute inset-0 flex flex-col items-center justify-center px-6" style="display:none;">
+   <div class="max-w-md w-full text-center space-y-5">
+    <div>
+     <h2 class="display-font font-semibold text-3xl md:text-4xl mb-1" style="color:var(--maroon);">Vimala</h2>
+     <p class="ampersand text-2xl">&amp;</p>
+     <h2 class="display-font font-semibold text-3xl md:text-4xl" style="color:var(--maroon);">Manibharathi</h2>
+    </div>
+
+    <!-- Perumal & Lakshmi -->
+    <div class="deity-frame" aria-label="Lord Perumal and Goddess Lakshmi">
+      <svg viewBox="0 0 110 130" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="bg-glow" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#ffe9a0"/><stop offset="100%" stop-color="#fff8ec"/></radialGradient>
+          <radialGradient id="skin-grad" cx="50%" cy="30%" r="60%"><stop offset="0%" stop-color="#d4956a"/><stop offset="100%" stop-color="#a8623a"/></radialGradient>
+          <radialGradient id="skin-grad2" cx="50%" cy="30%" r="60%"><stop offset="0%" stop-color="#f5c9a0"/><stop offset="100%" stop-color="#e0a070"/></radialGradient>
+        </defs>
+        <rect width="110" height="130" fill="url(#bg-glow)"/>
+        <g opacity="0.5">
+          <ellipse cx="55" cy="128" rx="40" ry="8" fill="#f9d57a"/>
+          <ellipse cx="28" cy="122" rx="12" ry="6" fill="#f5b8c8" transform="rotate(-30 28 122)"/>
+          <ellipse cx="82" cy="122" rx="12" ry="6" fill="#f5b8c8" transform="rotate(30 82 122)"/>
+        </g>
+        <ellipse cx="55" cy="55" rx="42" ry="48" fill="none" stroke="#C9A227" stroke-width="1" opacity="0.4"/>
+        <!-- Perumal -->
+        <rect x="20" y="18" width="22" height="16" rx="3" fill="#C9A227"/>
+        <rect x="24" y="14" width="14" height="8" rx="2" fill="#e8c766"/>
+        <polygon points="31,10 34,16 28,16" fill="#C9A227"/>
+        <circle cx="31" cy="18" r="2" fill="#7A1B2E"/>
+        <ellipse cx="31" cy="38" rx="11" ry="12" fill="url(#skin-grad)"/>
+        <ellipse cx="27" cy="36" rx="2.2" ry="1.5" fill="white"/><circle cx="27.5" cy="36" r="1" fill="#3D2B1F"/>
+        <ellipse cx="35" cy="36" rx="2.2" ry="1.5" fill="white"/><circle cx="35.5" cy="36" r="1" fill="#3D2B1F"/>
+        <ellipse cx="31" cy="31" rx="1.5" ry="2" fill="#C9A227"/>
+        <line x1="31" y1="29" x2="31" y2="25" stroke="#C9A227" stroke-width="1.2"/>
+        <path d="M28,43 Q31,46 34,43" fill="none" stroke="#9a5a30" stroke-width="1"/>
+        <circle cx="20" cy="38" r="2.5" fill="#C9A227"/><circle cx="20" cy="38" r="1.2" fill="#7A1B2E"/>
+        <rect x="27" y="49" width="8" height="5" rx="2" fill="url(#skin-grad)"/>
+        <path d="M22,52 Q31,56 40,52" fill="none" stroke="#C9A227" stroke-width="1.5"/>
+        <rect x="17" y="55" width="28" height="34" rx="4" fill="#7A1B2E"/>
+        <path d="M17,60 Q31,63 45,60" fill="none" stroke="#C9A227" stroke-width="1"/>
+        <ellipse cx="48" cy="62" rx="5" ry="7" fill="#fffdf7" stroke="#C9A227" stroke-width="0.8"/>
+        <circle cx="14" cy="60" r="5" fill="none" stroke="#C9A227" stroke-width="1.5"/>
+        <circle cx="14" cy="60" r="2" fill="#C9A227"/>
+        <line x1="14" y1="55" x2="14" y2="65" stroke="#C9A227" stroke-width="0.8"/>
+        <line x1="9" y1="60" x2="19" y2="60" stroke="#C9A227" stroke-width="0.8"/>
+        <path d="M17,60 Q10,62 14,68" fill="none" stroke="url(#skin-grad)" stroke-width="5" stroke-linecap="round"/>
+        <path d="M45,60 Q50,63 48,70" fill="none" stroke="url(#skin-grad)" stroke-width="5" stroke-linecap="round"/>
+        <!-- Lakshmi -->
+        <rect x="68" y="15" width="22" height="16" rx="3" fill="#C9A227"/>
+        <rect x="72" y="11" width="14" height="8" rx="2" fill="#e8c766"/>
+        <polygon points="79,7 82,13 76,13" fill="#C9A227"/>
+        <circle cx="79" cy="15" r="2" fill="#7A1B2E"/>
+        <ellipse cx="79" cy="35" rx="11" ry="12" fill="url(#skin-grad2)"/>
+        <ellipse cx="75" cy="33" rx="2.5" ry="1.8" fill="white"/><circle cx="75.5" cy="33" r="1.1" fill="#3D2B1F"/>
+        <ellipse cx="83" cy="33" rx="2.5" ry="1.8" fill="white"/><circle cx="83.5" cy="33" r="1.1" fill="#3D2B1F"/>
+        <circle cx="79" cy="28" r="2" fill="#7A1B2E"/>
+        <path d="M76,40 Q79,43 82,40" fill="none" stroke="#c06060" stroke-width="1"/>
+        <circle cx="68" cy="35" r="3" fill="#C9A227"/>
+        <ellipse cx="79" cy="25" rx="11" ry="6" fill="#2a1a0a"/>
+        <path d="M68,28 Q74,24 80,25" fill="none" stroke="white" stroke-width="2" stroke-dasharray="2,2"/>
+        <rect x="75" y="46" width="8" height="5" rx="2" fill="url(#skin-grad2)"/>
+        <path d="M70,49 Q79,54 88,49" fill="none" stroke="#C9A227" stroke-width="1.5"/>
+        <ellipse cx="79" cy="54" rx="3" ry="4" fill="#C9A227"/>
+        <rect x="65" y="52" width="28" height="34" rx="4" fill="#7A1B2E"/>
+        <rect x="65" y="52" width="28" height="12" rx="3" fill="#9a2040"/>
+        <path d="M65,64 Q79,67 93,64" fill="none" stroke="#C9A227" stroke-width="1.5"/>
+        <path d="M94,62 Q98,58 96,54" fill="none" stroke="url(#skin-grad2)" stroke-width="5" stroke-linecap="round"/>
+        <ellipse cx="96" cy="52" rx="5" ry="4" fill="#f9a8c9"/>
+        <circle cx="96" cy="50" r="1.5" fill="#f9d57a"/>
+        <path d="M65,60 Q60,58 62,66" fill="none" stroke="url(#skin-grad2)" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="60" cy="67" r="3.5" fill="#C9A227"/>
+        <circle cx="57" cy="72" r="3" fill="#C9A227"/>
+        <rect x="5" y="5" width="100" height="2" rx="1" fill="#C9A227" opacity="0.3"/>
+        <rect x="5" y="123" width="100" height="2" rx="1" fill="#C9A227" opacity="0.3"/>
+      </svg>
+    </div>
+
+    <!-- Wedding Card -->
+    <button id="wedding-card-btn" type="button" class="block w-full rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C9A227]">
+     <div class="invite-card p-6 rounded-2xl hover:shadow-lg transition-shadow cursor-pointer">
+      <span class="kolam-corner tl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+      <span class="kolam-corner tr"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+      <span class="kolam-corner br"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+      <span class="kolam-corner bl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+      <h2 class="display-font font-semibold mb-3 text-xl md:text-2xl" style="color:var(--maroon);">💍 Wedding Ceremony</h2>
+      <div class="divider-line w-16 mx-auto mb-3"></div>
+      <p class="mb-2">Monday, 7th September 2026</p>
+      <p class="mb-2">Muhurtham: 6:00 AM – 7:30 AM</p>
+      <p class="mb-3">Sri Kalpana AC Mahal, Lospet, Pondicherry</p>
+      <p class="text-sm" style="color:var(--gold-light);filter:brightness(0.8);">tap for venue details &amp; map →</p>
+     </div>
+    </button>
+
+    <!-- Reception Card -->
+    <button id="reception-card-btn" type="button" class="block w-full rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C9A227]">
+     <div class="invite-card p-6 rounded-2xl hover:shadow-lg transition-shadow cursor-pointer">
+      <span class="kolam-corner tl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+      <span class="kolam-corner tr"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+      <span class="kolam-corner br"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+      <span class="kolam-corner bl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+      <h2 class="display-font font-semibold mb-3 text-xl md:text-2xl" style="color:var(--maroon);">🌸 Reception</h2>
+      <div class="divider-line w-16 mx-auto mb-3"></div>
+      <p class="mb-2">Sunday, 6th September 2026</p>
+      <p class="mb-2">6:00 PM onwards</p>
+      <p class="mb-3">Sri Kalpana AC Mahal, Lospet, Pondicherry</p>
+      <p class="text-sm" style="color:var(--gold-light);filter:brightness(0.8);">tap for venue details &amp; map →</p>
+     </div>
+    </button>
+
+    <p class="italic mt-2 pb-4" style="font-family:Cardo,serif;color:var(--maroon-dark);">Your blessings mean the world to us</p>
+   </div>
+  </div>
+
+  <!-- Page 3 — Wedding Venue -->
+  <div id="page3" class="page-transition fade-out absolute inset-0 flex flex-col items-center justify-center px-6" style="display:none;">
+   <div class="max-w-md w-full text-center space-y-6">
+    <button id="back-btn-wedding" type="button" class="flex items-center justify-center gap-2 mx-auto mb-4 rounded" style="color:var(--maroon);">
+     <i data-lucide="chevron-left" style="width:20px;height:20px;"></i><span>Back</span>
+    </button>
+    <div class="invite-card rounded-2xl p-6">
+     <span class="kolam-corner tl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <span class="kolam-corner tr"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <span class="kolam-corner br"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <span class="kolam-corner bl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <h2 class="display-font font-semibold mb-4 text-xl md:text-2xl" style="color:var(--maroon);">💍 Wedding — Venue &amp; Timing</h2>
+     <div class="divider-line w-16 mx-auto mb-4"></div>
+     <p class="mb-2"><strong>Date:</strong> Monday, 7th September 2026</p>
+     <p class="mb-3"><strong>Muhurtham:</strong> 6:00 AM – 7:30 AM</p>
+     <p class="mb-4">Sri Kalpana AC Mahal,<br>Lospet, Pondicherry – 605 001</p>
+    </div>
+    <a href="https://www.google.com/maps/search/Sri+Kalpana+AC+Mahal,+Lospet,+Pondicherry" target="_blank" rel="noopener noreferrer" class="block">
+     <button type="button" class="w-full py-3 px-4 rounded-lg font-semibold hover:shadow-lg" style="background:var(--maroon);color:var(--cream);border:1px solid var(--gold);">Open in Google Maps</button>
+    </a>
+    <p class="italic text-sm" style="font-family:Cardo,serif;color:var(--maroon-dark);">Kindly arrive a little before the muhurtham</p>
+   </div>
+  </div>
+
+  <!-- Page 4 — Reception Venue -->
+  <div id="page4" class="page-transition fade-out absolute inset-0 flex flex-col items-center justify-center px-6" style="display:none;">
+   <div class="max-w-md w-full text-center space-y-6">
+    <button id="back-btn-reception" type="button" class="flex items-center justify-center gap-2 mx-auto mb-4 rounded" style="color:var(--maroon);">
+     <i data-lucide="chevron-left" style="width:20px;height:20px;"></i><span>Back</span>
+    </button>
+    <div class="invite-card rounded-2xl p-6">
+     <span class="kolam-corner tl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <span class="kolam-corner tr"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <span class="kolam-corner br"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <span class="kolam-corner bl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <h2 class="display-font font-semibold mb-4 text-xl md:text-2xl" style="color:var(--maroon);">🌸 Reception — Venue &amp; Timing</h2>
+     <div class="divider-line w-16 mx-auto mb-4"></div>
+     <p class="mb-2"><strong>Date:</strong> Sunday, 6th September 2026</p>
+     <p class="mb-3"><strong>Time:</strong> 6:00 PM onwards</p>
+     <p class="mb-4">Sri Kalpana AC Mahal,<br>Lospet, Pondicherry – 605 001</p>
+    </div>
+    <a href="https://www.google.com/maps/search/Sri+Kalpana+AC+Mahal,+Lospet,+Pondicherry" target="_blank" rel="noopener noreferrer" class="block">
+     <button type="button" class="w-full py-3 px-4 rounded-lg font-semibold hover:shadow-lg" style="background:var(--maroon);color:var(--cream);border:1px solid var(--gold);">Open in Google Maps</button>
+    </a>
+    <p class="italic text-sm" style="font-family:Cardo,serif;color:var(--maroon-dark);">We look forward to celebrating with you</p>
+   </div>
+  </div>
+
+  <!-- ===== WISHES FAB (bottom-right) ===== -->
+  <div id="wishes-fab">
+    <a id="view-wishes-link" href="#" role="button" aria-label="View all wishes">
+      ✦ View all wishes <span id="view-wishes-count"></span>
+    </a>
+    <button id="wishes-btn" aria-label="Send a wedding wish">
+      🌸 Send a Wish <span id="wish-count-badge"></span>
+    </button>
+  </div>
+
+  <!-- Overlay -->
+  <div id="wish-panel-overlay"></div>
+
+  <!-- ===== WISH INPUT PANEL ===== -->
+  <div id="wish-panel" role="dialog" aria-modal="true" aria-label="Send your wedding wish">
+    <div class="panel-handle"></div>
+    <h3 class="display-font font-semibold text-xl mb-1 text-center" style="color:var(--maroon);">Send Your Blessings</h3>
+    <p class="text-center text-sm mb-4 italic" style="color:var(--maroon-dark);font-family:Cardo,serif;">Vimala &amp; Manibharathi would love to hear from you</p>
+    <div id="wish-form-content">
+      <input id="wish-name-input" type="text" placeholder="Your name (optional)" maxlength="60" aria-label="Your name"/>
+      <textarea id="wish-textarea" placeholder="Write your wishes for the couple…" maxlength="400" aria-label="Your wedding wish"></textarea>
+      <div style="text-align:right;font-size:11px;color:rgba(61,43,31,0.4);margin-top:3px;" id="char-count">0 / 400</div>
+      <button id="send-wish-btn" type="button">Send Blessings ✦</button>
+    </div>
+    <div id="wish-success" class="wish-success" style="display:none;">
+      <div style="font-size:28px;margin-bottom:8px;">🌸</div>
+      <p>Thank you for your blessings!</p>
+      <p style="font-size:14px;margin-top:4px;font-family:Cardo,serif;color:var(--maroon-dark);">May your wishes reach the couple's hearts</p>
+    </div>
+    <button id="close-wish-panel" style="margin-top:14px;width:100%;padding:9px;background:transparent;border:1px solid rgba(201,162,39,0.35);border-radius:10px;font-family:Cardo,serif;font-size:14px;color:var(--ink);cursor:pointer;">Close</button>
+  </div>
+
+  <!-- ===== WISHES LIST PANEL ===== -->
+  <div id="wishes-list-panel" role="dialog" aria-modal="true" aria-label="All wedding wishes">
+    <div class="panel-handle"></div>
+    <h3 class="display-font font-semibold text-xl mb-1 text-center" style="color:var(--maroon);">Wedding Wishes</h3>
+    <p class="text-center text-sm mb-4 italic" style="color:var(--maroon-dark);font-family:Cardo,serif;">Blessings from loved ones</p>
+    <div id="wishes-list-content">
+      <div class="empty-wishes">No wishes yet — be the first to bless the couple! 🌸</div>
+    </div>
+    <button id="close-wishes-list" style="margin-top:14px;width:100%;padding:9px;background:transparent;border:1px solid rgba(201,162,39,0.35);border-radius:10px;font-family:Cardo,serif;font-size:14px;color:var(--ink);cursor:pointer;">Close</button>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    // ---- Jasmine petals on page 1 ----
+    const container = document.getElementById('hearts-container');
+    for (let i = 0; i < 11; i++) {
+        const h = document.createElement('div');
+        h.className = 'jasmine-petal';
+        h.innerHTML = '<svg viewBox="0 0 40 40" width="30" height="30"><use href="#jasmine-flower"></use></svg>';
+        h.style.left = Math.random() * 90 + '%';
+        h.style.top = Math.random() * 90 + '%';
+        h.style.animationDuration = (8 + Math.random() * 6) + 's';
+        h.style.animationDelay = (Math.random() * 3) + 's';
+        h.style.opacity = 0.6 + Math.random() * 0.4;
+        h.style.transform = `scale(${0.7 + Math.random() * 0.6})`;
+        h.style.pointerEvents = 'auto';
+        h.addEventListener('click', showPage2);
+        container.appendChild(h);
+    }
+
+    // ---- Page transitions ----
+    function transition(fromId, toId) {
+        const from = document.getElementById(fromId);
+        const to   = document.getElementById(toId);
+        from.classList.add('fade-out');
+        setTimeout(() => {
+            from.style.display = 'none';
+            from.classList.remove('fade-out');
+            to.style.display = 'flex';
+            to.classList.remove('fade-out');
+            lucide.createIcons();
+        }, 600);
+    }
+
+    function showPage2()         { transition('page1', 'page2'); }
+    function showPage3()         { transition('page2', 'page3'); }
+    function showPage4()         { transition('page2', 'page4'); }
+    function backToP2FromP3()    { transition('page3', 'page2'); }
+    function backToP2FromP4()    { transition('page4', 'page2'); }
+
+    document.getElementById('wedding-card-btn').addEventListener('click', showPage3);
+    document.getElementById('reception-card-btn').addEventListener('click', showPage4);
+    document.getElementById('back-btn-wedding').addEventListener('click', backToP2FromP3);
+    document.getElementById('back-btn-reception').addEventListener('click', backToP2FromP4);
+
+    // ---- Wishes storage key ----
+    const WISHES_KEY = 'vimala-manibharathi-wishes-2026';
+
+    // Load wishes from localStorage
+    function loadWishes() {
+        try {
+            const raw = localStorage.getItem(WISHES_KEY);
+            return raw ? JSON.parse(raw) : [];
+        } catch(e) {
+            return [];
+        }
+    }
+
+    function saveWishes(wishes) {
+        try {
+            localStorage.setItem(WISHES_KEY, JSON.stringify(wishes));
+        } catch(e) {
+            console.error('Could not save wish:', e);
+        }
+    }
+
+    // Update badge & view-link
+    function refreshWishUI() {
+        const wishes = loadWishes();
+        const count = wishes.length;
+        const badge = document.getElementById('wish-count-badge');
+        const viewLink = document.getElementById('view-wishes-link');
+        const viewCount = document.getElementById('view-wishes-count');
+        if (count > 0) {
+            badge.style.display = 'inline-block';
+            badge.textContent = count;
+            viewLink.style.display = 'inline-block';
+            viewCount.textContent = '(' + count + ')';
+        } else {
+            badge.style.display = 'none';
+            viewLink.style.display = 'none';
+        }
+    }
+
+    // ---- Wish panel open/close ----
+    const wishPanel    = document.getElementById('wish-panel');
+    const overlay      = document.getElementById('wish-panel-overlay');
+    const listPanel    = document.getElementById('wishes-list-panel');
+
+    function openWishPanel() {
+        closeAllPanels();
+        wishPanel.classList.add('open');
+        overlay.classList.add('open');
+        // reset form
+        document.getElementById('wish-form-content').style.display = 'block';
+        document.getElementById('wish-success').style.display = 'none';
+        document.getElementById('wish-textarea').value = '';
+        document.getElementById('wish-name-input').value = '';
+        document.getElementById('char-count').textContent = '0 / 400';
+        document.getElementById('wish-textarea').focus();
+    }
+
+    function openWishesList() {
+        closeAllPanels();
+        renderWishesList();
+        listPanel.classList.add('open');
+        overlay.classList.add('open');
+    }
+
+    function closeAllPanels() {
+        wishPanel.classList.remove('open');
+        listPanel.classList.remove('open');
+        overlay.classList.remove('open');
+    }
+
+    document.getElementById('wishes-btn').addEventListener('click', openWishPanel);
+    document.getElementById('view-wishes-link').addEventListener('click', (e) => { e.preventDefault(); openWishesList(); });
+    document.getElementById('close-wish-panel').addEventListener('click', closeAllPanels);
+    document.getElementById('close-wishes-list').addEventListener('click', closeAllPanels);
+    overlay.addEventListener('click', closeAllPanels);
+
+    // ---- Char counter ----
+    document.getElementById('wish-textarea').addEventListener('input', function() {
+        document.getElementById('char-count').textContent = this.value.length + ' / 400';
+    });
+
+    // ---- Send wish ----
+    document.getElementById('send-wish-btn').addEventListener('click', function() {
+        const text = document.getElementById('wish-textarea').value.trim();
+        if (!text) {
+            document.getElementById('wish-textarea').focus();
+            document.getElementById('wish-textarea').style.borderColor = '#7A1B2E';
+            setTimeout(() => document.getElementById('wish-textarea').style.borderColor = '', 1200);
+            return;
+        }
+        this.disabled = true;
+        this.textContent = 'Sending…';
+
+        const name = document.getElementById('wish-name-input').value.trim() || 'A well-wisher';
+        const wishes = loadWishes();
+        wishes.unshift({
+            name,
+            text,
+            time: new Date().toISOString()
+        });
+        saveWishes(wishes);
+        refreshWishUI();
+
+        this.disabled = false;
+        this.textContent = 'Send Blessings ✦';
+        document.getElementById('wish-form-content').style.display = 'none';
+        document.getElementById('wish-success').style.display = 'block';
+
+        setTimeout(closeAllPanels, 2200);
+    });
+
+    // ---- Render wishes list ----
+    function renderWishesList() {
+        const wishes = loadWishes();
+        const container = document.getElementById('wishes-list-content');
+        if (wishes.length === 0) {
+            container.innerHTML = '<div class="empty-wishes">No wishes yet — be the first to bless the couple! 🌸</div>';
+            return;
+        }
+        container.innerHTML = wishes.map(w => {
+            const date = new Date(w.time);
+            const formatted = date.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' })
+                + ' · ' + date.toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit', hour12:true });
+            return `<div class="wish-card">
+                <span class="wish-jasmine">🌸</span>
+                <div class="wish-from">${escHtml(w.name)}</div>
+                <div class="wish-text">${escHtml(w.text)}</div>
+                <div class="wish-time">${formatted}</div>
+            </div>`;
+        }).join('');
+    }
+
+    function escHtml(s) {
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // Init
+    refreshWishUI();
+  </script>
+ </body>
+</html>
