@@ -17,12 +17,17 @@
             --ink: #3D2B1F;
         }
 
+        html {
+            overflow-x: hidden; /* belt-and-braces: no horizontal scrollbar on any device width */
+        }
+
         body {
             font-family: 'Cardo', serif;
             color: var(--ink);
             background-color: var(--ivory);
             background-image: radial-gradient(circle, rgba(122,27,46,0.10) 1px, transparent 1.6px);
             background-size: 22px 22px;
+            overflow-x: hidden;
         }
 
         h1, h2, .display-font { font-family: 'Cormorant Garamond', serif; }
@@ -67,6 +72,8 @@
             user-select: none;
             transition: transform 0.2s;
             filter: drop-shadow(0 1px 3px rgba(122,27,46,0.18));
+            padding: 10px; /* enlarges the tappable area without changing the visual flower size */
+            margin: -10px;
         }
         .jasmine-petal:hover { transform: scale(1.35) rotate(8deg); }
         @keyframes floatPetal {
@@ -385,7 +392,211 @@
             cursor: pointer;
         }
 
+        /* ---- Countdown timer ---- */
+        #countdown {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 22px 0 6px;
+        }
+        .countdown-unit {
+            background: var(--cream);
+            border: 1px solid rgba(201,162,39,0.45);
+            border-radius: 12px;
+            padding: 10px 6px;
+            min-width: 58px;
+            box-shadow: 0 4px 16px -6px rgba(74,15,28,0.2);
+        }
+        .countdown-unit .num {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 26px;
+            color: var(--maroon);
+            line-height: 1;
+        }
+        .countdown-unit .label {
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-top: 4px;
+        }
+
+        /* ---- Gentle shimmer on the couple's names ---- */
+        .shimmer-text {
+            background: linear-gradient(100deg, var(--maroon) 40%, var(--gold-light) 50%, var(--maroon) 60%);
+            background-size: 220% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerMove 5s ease-in-out infinite;
+        }
+        @keyframes shimmerMove {
+            0%, 100% { background-position: 200% center; }
+            50% { background-position: 0% center; }
+        }
+
+        /* ---- Mini countdown (top-right corner, pages 2 & 3) ---- */
+        #mini-countdown {
+            position: fixed;
+            top: 14px; right: 14px;
+            z-index: 90;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: linear-gradient(135deg, var(--cream), var(--ivory));
+            border: 1px solid rgba(201,162,39,0.55);
+            border-radius: 999px;
+            padding: 7px 14px 7px 10px;
+            box-shadow: 0 4px 16px -4px rgba(74,15,28,0.28);
+            opacity: 0;
+            transform: translateY(-8px) scale(0.95);
+            pointer-events: none;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+        #mini-countdown.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+        #mini-countdown .mini-flower {
+            font-size: 13px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        #mini-countdown .mini-countdown-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--maroon);
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+        @media (max-width: 400px) {
+            #mini-countdown { top: 10px; right: 10px; padding: 6px 11px 6px 9px; }
+            #mini-countdown .mini-countdown-text { font-size: 11.5px; }
+        }
+
+        /* ---- The Couple page ---- */
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-family: 'Cardo', serif;
+        }
+        .couple-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 28px;
+            color: var(--maroon);
+            line-height: 1.15;
+            margin-top: 4px;
+        }
+        .couple-qual {
+            font-family: 'Cardo', serif;
+            font-size: 14px;
+            color: var(--maroon-dark);
+            margin-top: 5px;
+        }
+        .couple-role {
+            font-family: 'Cardo', serif;
+            font-size: 15px;
+            color: var(--ink);
+            margin-top: 12px;
+        }
+        .couple-parent-label {
+            font-family: 'Cardo', serif;
+            font-size: 13px;
+            color: var(--gold-light);
+            filter: brightness(0.75);
+            margin-top: 16px;
+        }
+        .couple-parent-names {
+            font-family: 'Cardo', serif;
+            font-size: 15px;
+            color: var(--ink);
+            margin-top: 2px;
+        }
+        .diamond-divider, .heart-divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .diamond-divider { margin: 14px 0 22px; }
+        .heart-divider { margin: 22px 0; }
+        .diamond-divider .line, .heart-divider .line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+        .diamond-divider .diamond {
+            width: 8px; height: 8px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+        .heart-divider .heart-badge {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: var(--maroon);
+            border: 2px solid var(--gold);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 14px rgba(74,15,28,0.3);
+            flex-shrink: 0;
+        }
+        .heart-divider .heart-badge i { color: var(--cream); width: 18px; height: 18px; }
+
+        /* Groom/Bride cards use left-aligned text, unlike the centered cards elsewhere,
+           so the corner motifs need to be smaller and further inset to avoid overlapping the text
+           — and this must hold at any viewport width, not just the ones we've tested. */
+        .couple-card {
+            padding: 32px 20px 26px 28px !important;
+            overflow: hidden;
+        }
+        .couple-card .kolam-corner {
+            width: 20px; height: 20px;
+            opacity: 0.5;
+        }
+        .couple-card .kolam-corner.tl,
+        .couple-card .kolam-corner.tr { top: 7px; }
+        .couple-card .kolam-corner.bl,
+        .couple-card .kolam-corner.br { bottom: 7px; }
+        .couple-card .kolam-corner.tl,
+        .couple-card .kolam-corner.bl { left: 7px; }
+        .couple-card .kolam-corner.tr,
+        .couple-card .kolam-corner.br { right: 7px; }
+        .couple-name, .couple-qual, .couple-role,
+        .couple-parent-label, .couple-parent-names, .section-label {
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .couple-name { font-size: clamp(22px, 6.5vw, 28px); }
+        /* Wedding/Reception preview cards have a two-sided bottom row (venue link + Add to Calendar)
+           that sits right where the bottom corner motifs are — give it real vertical clearance
+           instead of relying on centering, since flex justify-between pins text to both edges. */
+        .event-card {
+            padding: 24px 24px 50px 24px;
+        }
+        .event-card .kolam-corner.bl,
+        .event-card .kolam-corner.br {
+            width: 24px;
+            height: 24px;
+        }
+
+        @media (max-width: 340px) {
+            .couple-card { padding: 30px 16px 22px 24px !important; }
+        }
+
+        @media (max-width: 360px) {
+            #countdown { gap: 6px; }
+            .countdown-unit { min-width: 48px; padding: 8px 4px; }
+            .countdown-unit .num { font-size: 21px; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
+            .shimmer-text { animation: none !important; }
             .jasmine-petal, .kolam-corner { animation: none !important; }
             #wish-panel, #wishes-list-panel { transition: none !important; }
         }
@@ -428,15 +639,33 @@
    <div class="text-center z-10 px-6">
     <p class="sri-mark text-sm mb-3">ஸ்ரீ</p>
     <p class="text-lg mb-4 italic" style="font-family:Cardo,serif;color:var(--maroon-dark);">With the blessings of our families</p>
-    <h1 class="display-font font-semibold text-4xl md:text-5xl mb-6 tracking-wide" style="color:var(--maroon);">A Vimala <span class="ampersand">&amp;</span> S Manibharathi</h1>
+    <h1 class="display-font font-semibold text-4xl md:text-5xl mb-2 tracking-wide shimmer-text">A Vimala <span class="ampersand">&amp;</span> S Manibharathi</h1>
+
+    <div id="countdown" aria-label="Countdown to the wedding ceremony">
+     <div class="countdown-unit"><div class="num" id="cd-days">00</div><div class="label">Days</div></div>
+     <div class="countdown-unit"><div class="num" id="cd-hours">00</div><div class="label">Hrs</div></div>
+     <div class="countdown-unit"><div class="num" id="cd-mins">00</div><div class="label">Min</div></div>
+     <div class="countdown-unit"><div class="num" id="cd-secs">00</div><div class="label">Sec</div></div>
+    </div>
+    <p id="countdown-caption" class="text-xs italic mt-1" style="color:var(--maroon-dark);">until the wedding ceremony</p>
+
     <p class="text-xs uppercase tracking-[0.2em] mt-8 animate-pulse" style="color:var(--gold);">✦ tap a jasmine to begin ✦</p>
    </div>
    <div id="hearts-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
   </div>
 
+  <!-- Mini countdown — floats above pages 2 & 3 -->
+  <div id="mini-countdown" aria-label="Countdown to the wedding ceremony">
+   <span class="mini-flower">🌸</span>
+   <span class="mini-countdown-text" id="mini-countdown-text">—</span>
+  </div>
+
   <!-- Page 2 -->
-  <div id="page2" class="page-transition fade-out absolute inset-0 flex flex-col items-center justify-center px-6" style="display:none;">
+  <div id="page2" class="page-transition fade-out absolute inset-0 flex flex-col items-center justify-start px-6" style="display:none;">
    <div class="max-w-md w-full text-center space-y-5">
+    <button id="back-btn-page2" type="button" class="flex items-center gap-2 rounded" style="color:var(--maroon);">
+     <i data-lucide="chevron-left" style="width:20px;height:20px;"></i><span>Back</span>
+    </button>
     <div>
      <h2 class="display-font font-semibold text-3xl md:text-4xl mb-1" style="color:var(--maroon);">A Vimala</h2>
      <p class="ampersand text-2xl">&amp;</p>
@@ -448,9 +677,23 @@
       <img src="images/perumal-lakshmi.png" alt="Traditional depiction of Lord Perumal and Goddess Lakshmi blessing the wedding couple">
     </div>
 
+    <!-- The Couple Card -->
+    <button id="couple-card-btn" type="button" class="block w-full rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C9A227]">
+     <div class="invite-card p-6 rounded-2xl hover:shadow-lg transition-shadow cursor-pointer">
+      <span class="kolam-corner tl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+      <span class="kolam-corner tr"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+      <span class="kolam-corner br"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+      <span class="kolam-corner bl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+      <h2 class="display-font font-semibold mb-3 text-xl md:text-2xl" style="color:var(--maroon);">👫 The Couple</h2>
+      <div class="divider-line w-16 mx-auto mb-3"></div>
+      <p class="mb-3">Meet the Groom &amp; Bride</p>
+      <p class="text-sm text-center" style="color:var(--gold-light);filter:brightness(0.8);">tap to know more →</p>
+     </div>
+    </button>
+
     <!-- Wedding Card -->
     <button id="wedding-card-btn" type="button" class="block w-full rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C9A227]">
-     <div class="invite-card p-6 rounded-2xl hover:shadow-lg transition-shadow cursor-pointer">
+     <div class="invite-card event-card rounded-2xl hover:shadow-lg transition-shadow cursor-pointer">
       <span class="kolam-corner tl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
       <span class="kolam-corner tr"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
       <span class="kolam-corner br"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
@@ -469,7 +712,7 @@
 
     <!-- Reception Card -->
     <button id="reception-card-btn" type="button" class="block w-full rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C9A227]">
-     <div class="invite-card p-6 rounded-2xl hover:shadow-lg transition-shadow cursor-pointer">
+     <div class="invite-card event-card rounded-2xl hover:shadow-lg transition-shadow cursor-pointer">
       <span class="kolam-corner tl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
       <span class="kolam-corner tr"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
       <span class="kolam-corner br"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
@@ -535,6 +778,56 @@
      <button type="button" class="w-full py-3 px-4 rounded-lg font-semibold hover:shadow-lg" style="background:var(--maroon);color:var(--cream);border:1px solid var(--gold);">Open in Google Maps</button>
     </a>
     <p class="italic text-sm" style="font-family:Cardo,serif;color:var(--maroon-dark);">We look forward to celebrating with you</p>
+   </div>
+  </div>
+
+  <!-- Page 5 — The Couple -->
+  <div id="page5" class="page-transition fade-out absolute inset-0 flex flex-col items-center justify-start px-6" style="display:none; overflow-y:auto; padding-top:2rem; padding-bottom:3rem;">
+   <div class="max-w-md w-full text-center">
+    <button id="back-btn-couple" type="button" class="flex items-center gap-2 mb-3 rounded" style="color:var(--maroon);">
+     <i data-lucide="chevron-left" style="width:20px;height:20px;"></i><span>Back</span>
+    </button>
+
+    <p class="section-label">The Couple</p>
+    <h2 class="display-font font-semibold text-3xl md:text-4xl italic mt-1 mb-1" style="color:var(--maroon);">Two Hearts,<br>One Promise</h2>
+
+    <div class="diamond-divider">
+     <span class="line"></span><span class="diamond"></span><span class="line"></span>
+    </div>
+
+    <!-- Groom Card -->
+    <div class="invite-card couple-card rounded-2xl text-left" style="position:relative;">
+     <span class="kolam-corner tl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <span class="kolam-corner tr"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <span class="kolam-corner br"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <span class="kolam-corner bl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <p class="section-label mb-1">The Groom</p>
+     <h3 class="couple-name">S Manibharathi</h3>
+     <p class="couple-qual">B.E., LLB., (Hons) PGDIPR</p>
+     <p class="couple-role">Advocate, Sun TV Network Limited</p>
+     <p class="couple-parent-label">Son of</p>
+     <p class="couple-parent-names">Mr. M. Subramaniyan &amp; Mrs. Vijaya</p>
+    </div>
+
+    <div class="heart-divider">
+     <span class="line"></span>
+     <span class="heart-badge"><i data-lucide="heart"></i></span>
+     <span class="line"></span>
+    </div>
+
+    <!-- Bride Card -->
+    <div class="invite-card couple-card rounded-2xl text-left" style="position:relative;">
+     <span class="kolam-corner tl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <span class="kolam-corner tr"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <span class="kolam-corner br"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <span class="kolam-corner bl"><svg viewBox="0 0 60 60" class="w-full h-full"><use href="#kolam-motif"/></svg></span>
+     <p class="section-label mb-1">The Bride</p>
+     <h3 class="couple-name">A Vimala</h3>
+     <p class="couple-qual">B.Tech., MBA</p>
+     <p class="couple-role">Business Analyst, Tata Consultancy Services</p>
+     <p class="couple-parent-label">Daughter of</p>
+     <p class="couple-parent-names">Mr. C. Arumugam &amp; Mrs. Vijaya</p>
+    </div>
    </div>
   </div>
 
@@ -620,17 +913,61 @@
     for (let i = 0; i < 11; i++) {
         const h = document.createElement('div');
         h.className = 'jasmine-petal';
-        h.innerHTML = '<svg viewBox="0 0 40 40" width="30" height="30"><use href="#jasmine-flower"></use></svg>';
-        h.style.left = Math.random() * 90 + '%';
-        h.style.top = Math.random() * 90 + '%';
+        h.innerHTML = '<svg viewBox="0 0 40 40" width="46" height="46"><use href="#jasmine-flower"></use></svg>';
+        h.style.left = Math.random() * 82 + '%';
+        h.style.top = Math.random() * 82 + '%';
         h.style.animationDuration = (8 + Math.random() * 6) + 's';
         h.style.animationDelay = (Math.random() * 3) + 's';
         h.style.opacity = 0.6 + Math.random() * 0.4;
-        h.style.transform = `scale(${0.7 + Math.random() * 0.6})`;
+        h.style.transform = `scale(${0.85 + Math.random() * 0.5})`;
         h.style.pointerEvents = 'auto';
         h.addEventListener('click', showPage2);
         container.appendChild(h);
     }
+
+    // ---- Countdown to the wedding ceremony (7 Sept 2026, 6:00 AM IST) ----
+    const WEDDING_DATETIME = new Date('2026-09-07T06:00:00+05:30');
+    const miniCountdownEl = document.getElementById('mini-countdown');
+    function showMiniCountdown() { miniCountdownEl.classList.add('visible'); }
+    function hideMiniCountdown() { miniCountdownEl.classList.remove('visible'); }
+
+    function updateCountdown() {
+        const now = new Date();
+        let diff = WEDDING_DATETIME - now;
+        const daysEl = document.getElementById('cd-days');
+        const hoursEl = document.getElementById('cd-hours');
+        const minsEl = document.getElementById('cd-mins');
+        const secsEl = document.getElementById('cd-secs');
+        const caption = document.getElementById('countdown-caption');
+        const miniText = document.getElementById('mini-countdown-text');
+
+        const expired = diff <= 0;
+        if (expired) diff = 0;
+        const pad = n => String(n).padStart(2, '0');
+        const days = Math.floor(diff / 86400000); diff -= days * 86400000;
+        const hours = Math.floor(diff / 3600000); diff -= hours * 3600000;
+        const mins = Math.floor(diff / 60000); diff -= mins * 60000;
+        const secs = Math.floor(diff / 1000);
+
+        if (daysEl) {
+            if (expired) {
+                document.getElementById('countdown').style.display = 'none';
+                caption.textContent = '✦ Today is the big day! ✦';
+            } else {
+                daysEl.textContent = pad(days);
+                hoursEl.textContent = pad(hours);
+                minsEl.textContent = pad(mins);
+                secsEl.textContent = pad(secs);
+            }
+        }
+        if (miniText) {
+            miniText.textContent = expired ? "It's today! 🎉" : pad(days) + 'd ' + pad(hours) + 'h ' + pad(mins) + 'm';
+        }
+        if (expired) clearInterval(countdownTimer);
+    }
+    updateCountdown();
+    const countdownTimer = setInterval(updateCountdown, 1000);
+
 
     // ---- Page transitions ----
     function transition(fromId, toId) {
@@ -642,20 +979,27 @@
             from.classList.remove('fade-out');
             to.style.display = 'flex';
             to.classList.remove('fade-out');
+            to.scrollTop = 0; // always start the new page from the top
             lucide.createIcons();
         }, 600);
     }
 
-    function showPage2()         { transition('page1', 'page2'); }
+    function showPage2()         { transition('page1', 'page2'); showMiniCountdown(); }
     function showPage3()         { transition('page2', 'page3'); }
-    function showPage4()         { transition('page2', 'page4'); }
+    function showPage4()         { transition('page2', 'page4'); hideMiniCountdown(); }
+    function showPage5()         { transition('page2', 'page5'); hideMiniCountdown(); }
+    function backToP1FromP2()    { transition('page2', 'page1'); hideMiniCountdown(); }
     function backToP2FromP3()    { transition('page3', 'page2'); }
-    function backToP2FromP4()    { transition('page4', 'page2'); }
+    function backToP2FromP4()    { transition('page4', 'page2'); showMiniCountdown(); }
+    function backToP2FromP5()    { transition('page5', 'page2'); showMiniCountdown(); }
 
     document.getElementById('wedding-card-btn').addEventListener('click', showPage3);
     document.getElementById('reception-card-btn').addEventListener('click', showPage4);
+    document.getElementById('couple-card-btn').addEventListener('click', showPage5);
+    document.getElementById('back-btn-page2').addEventListener('click', backToP1FromP2);
     document.getElementById('back-btn-wedding').addEventListener('click', backToP2FromP3);
     document.getElementById('back-btn-reception').addEventListener('click', backToP2FromP4);
+    document.getElementById('back-btn-couple').addEventListener('click', backToP2FromP5);
 
     // ---- Wishes storage key (local fallback cache only) ----
     const WISHES_KEY = 'vimala-manibharathi-wishes-2026';
@@ -894,7 +1238,7 @@
 
     // ---- Add to Calendar ----
     // Times are given in India Standard Time (Asia/Kolkata, UTC+5:30).
-    // Reception has no published end time ("6:00 PM onwards"); a 4-hour block is assumed for the calendar entry.
+    // Reception has no published end time ("7:30 PM onwards"); a 2-hour block is assumed for the calendar entry.
     const CALENDAR_EVENTS = {
         wedding: {
             shortTitle: 'Wedding Ceremony',
@@ -911,10 +1255,10 @@
             title: 'Reception — A Vimala & S Manibharathi',
             details: 'Reception begins at 7:30 PM onwards.',
             location: 'Sri Kalpana AC Mahal, Lawspet, Pondicherry – 605001',
-            startLocal: '20260906T180000',
-            endLocal: '20260906T220000',
-            startUTC: '20260906T123000Z',
-            endUTC: '20260906T163000Z'
+            startLocal: '20260906T193000',
+            endLocal: '20260906T213000',
+            startUTC: '20260906T140000Z',
+            endUTC: '20260906T160000Z'
         }
     };
 
